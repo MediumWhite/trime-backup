@@ -1,0 +1,141 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: wubi86          #方案内部名
+  name: "五笔86"             #方案显示名
+  version: "0.21"              #版本号
+  author:                     #发明人
+    - 發明人 王永民先生
+  description: |              #方案简述
+    五筆字型86版
+    碼表源自 ibus-table
+    敲 z 鍵進入拼音反查
+  dependencies:
+    - pinyin                #反查依赖方案
+    # - wanxiang_charset      #字符集过滤依赖方案
+  
+switches:
+  - name: ascii_mode       #中西转换开关
+    states: [中, 西]
+    reset: 0
+  - name: full_shape         #全半角符号开关
+    states: [半, 全]
+  - name: ascii_punct        #中西标点转换
+    states: [。，, .,]
+  - name: zh_trad           #繁体字滤镜
+    states: [简, 繁]
+  # - name: charset_filter     #常用字滤镜
+    # states: [常, 扩]
+    # reset: 0
+  # - name: _hide_candidate   #候选栏开关
+    # send: Mode_switch
+    # states: [态, 心]
+  - name: _linear            #影响悬浮窗滑动候选
+    states: [纵, 横]
+    reset: 1
+  - name: _hide_key_symbol  #长按符号开关
+    send: Mode_switch
+    states: [卡, 下]
+  - name: _hide_key_hint    #助记符号开关
+    send: Mode_switch
+    states: [卡, 上]
+  - name: 86wubi_spelling   #拆分提示开关
+    states: [根, 艮️]
+    reset: 0
+
+engine:    #引擎
+  processors:           #处理各类按键消息
+    - ascii_composer   #处理西文模式及中西切换
+    - lua_processor@*super_sequence*P  #手动调频
+    - recognizer       #与matcher搭配处理符合特定规则的输入码，如网址反查等标签
+    - key_binder      #按键定义
+    - speller   #拼写处理器，接受字符按键编辑输入
+    - punctuator       #句读处理器，将单个字符按键直接映射为标点符号或文字
+    - selector          #选字处理器，处理数字选字键、修行定位、换页
+    - navigator        #处理输入框内光标移动
+    - express_editor    #编辑器，处理空格、回车上屏、退格键
+  segmentors:           #识别不同内容类型，将输入码分段并加上tag
+    - ascii_segmentor   #标识西文段落字母直接上屏
+    - matcher   #配合recognizer标识符合特定规则的段落，如网址、反查等加上特定tag
+    - abc_segmentor     #标识常规文字段落加上"abc"tag
+    - punct_segmentor   #标识句读段落[键入标点符号用]加上"punct"tag
+    - fallback_segmentor  #标识其他未标识段落
+    - affix_segmentor     #用户自定义tag
+  translators:             #翻译编码段为候选文字
+    - punct_translator   #配合punct_segmentor转换标点符号
+    - reverse_lookup_translator   #反查翻译器
+    # - script_translator   #音节码表翻译器（双键调频需用）
+    - table_translator   #码表翻译器（模糊键无法调频，此项禁用时翻译器多项配置将失效）
+  filters:                #过滤器
+    # - lua_filter@*chars_filter       #字符集过滤
+    - lua_filter@*super_sequence*F   #手动调频
+    - simplifier         #用字转换
+    - simplifier@86wubi_spelling
+    - uniquifier        #过滤重复候选
+
+speller:                   #拼写处理器
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"          #音节(编码)分隔符
+  auto_clear: max_length  #自动清除空码
+  max_code_length: 4    #最大码长，超过上屏
+  auto_select: true        #首选上屏
+  auto_select_unique_candidate: true #无重码自动上屏
+
+translator:                     #编码翻译器
+  dictionary: wubi86          #翻译器调取词典
+  dynamic_frequency: true     #动态调频
+  enable_completion: true     #自动补全
+  enable_charset_filter: true    #字符集过滤
+  enable_sentence: true        #自动造句(太极开关)
+  enable_encoder: true        #自动造词
+  encode_commit_history: true #对上屏词自动成词
+  enable_user_dict: true       #用户词典
+  db_class: tabledb  #开启后生成*.txt,无法使用同步
+  max_phrase_length: 12          #最大自动成词长度
+  disable_user_dict_for_patterns:  #动态禁用用户词典
+    - "^z.*$"
+    # - "^[a-y]{1,3}$"             #单字不调频
+  # comment_format:
+    # - xform|~||       #去除逐码提示前的~
+    # - xform|.*||       #清空编码提示
+
+reverse_lookup:            #反查翻译器
+  dictionary: pinyin        #反查码表
+  prefix: "z"
+  suffix: "'"
+  tips: 〔拼音〕
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+    - "xform/^z//"  #提示框中不显示起始的z
+
+simplifier:                  #用字转换
+  opencc_config: s2t.json    #简转繁
+  option_name: zh_trad
+
+86wubi_spelling:
+  opencc_config: 86wubi_spelling.json
+  option_name: 86wubi_spelling
+  show_in_comment: true
+  comment_format: ["xform/&nbsp//"]
+  tags: [abc]
+  tips: all
+
+punctuator:                #特殊字符
+  import_preset: symbols   
+  digit_separator_action: commit #标点直接上屏,可选raw(作为原始输入)none(忽略/不处理)
+  # digit_separators: [".",":"]
+
+key_binder:                #按键定义
+  import_preset: default
+  bindings: 
+    - {when: has_menu, accept: '"', toggle: 86wubi_spelling}
+
+recognizer:               #处理特定规则的输入码
+  import_preset: default
+  patterns:
+    reverse_lookup: "^z[a-z]*'?$"
+    punct: '^/([0-9]0?|[A-Za-z]+)$' #配合symbols
+    uppercase: ""         #大写字母直接上屏

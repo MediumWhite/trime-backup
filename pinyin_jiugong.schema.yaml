@@ -1,0 +1,107 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: pinyin_jiugong
+  name: 拼音九宫
+  version: "0.19"
+  author:
+    - 佛振 <chen.sst@gmail.com>
+    - Uncle光 <467896722@qq.com>
+  description: |
+    「漢語拼音」，以符號按鍵 - / < \ 輸入四聲
+    拼音碼表根據 CC-CEDICT 改編
+  dependencies:
+    - stroke
+
+switches:
+  - name: ascii_punct
+    states: [ 。，, ．， ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 123 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - lua_processor@*super_sequence*P  #手动调频
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - script_translator
+  filters:
+    - lua_filter@*super_sequence*F   #手动调频
+    - simplifier                      #用字转换
+    - uniquifier                     #过滤重复候选
+
+speller:
+  alphabet: 123456789
+  delimiter: " '"
+  algebra:
+    - "xlit|12345|+_*^0|"
+    - erase/^xx$/
+    - abbrev/^([zcs]h).+$/$1/
+    - derive/^([nl])ve$/$1ue/
+    - derive/^([jqxy])u/$1v/
+    - derive/un$/uen/
+    - derive/ui$/uei/
+    - derive/iu$/iou/
+    - derive/([aeiou])ng$/$1gn/
+    - derive/([dtngkhrzcs])o(u|ng)$/$1o/
+    - derive/ong$/on/
+    - derive/ao$/oa/
+    - derive/([iu])a(o|ng?)$/a$1$2/
+    - xlit/abcdefghijklmnopqrstuvwxyz/22233344455566677778889999/
+    - derive/[+_*^0]//
+    - derive/([+_*^0])$//
+    - derive/^(.*)$/\U$1/
+
+translator:
+  dictionary: pinyin
+  prism: pinyin_jiugong
+  db_class: tabledb  #开启后生成*.txt,无法使用同步
+  spelling_hints: 16 # ～字以內候選標註完整帶調拼音
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+    - xform/eh/ê/
+
+reverse_lookup:
+  dictionary: stroke
+  enable_completion: true
+  prefix: "`"
+  suffix: "'"
+  tips: 〔笔画〕
+  preedit_format:
+    - "xlit|v|ü|"
+    - xform/iü/iv/
+    - xform/uü/uv/
+    - xlit/12345/一丨丿丶乙/
+
+punctuator:
+  import_preset: symbols
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    punct: "^/([0-9]+[a-z]*|[a-z]+)$"
+    reverse_lookup: "`[1-5]*'?$"

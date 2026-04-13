@@ -1,0 +1,768 @@
+# Trime default style settings
+# encoding: utf-8
+
+config_version: "4.3"    #版本号
+name: "树新风"        #方案名称
+author: "讲文明"       #作者信息
+
+#颜色
+colors:
+  1: &color1 0xff000000   #黑
+  2: &color2 0xffffffff      #白
+  3: &color3 0xffe1e3e7   #浅灰
+  4: &color4 0xffacb2c2   #中灰
+  5: &color5 0xff838383   #深灰
+  6: &color6 0xff3266a0   #深蓝
+  7: &color7 0x00         #透明
+  8: &color8 0xff0080ff    #亮蓝
+  9: &color9 gl.9.png      #玻璃绿
+  10: &color10 bl.9.png    #玻璃
+#配色方案
+preset_color_schemes:
+  default:
+    name: "标配"
+    dark_scheme: glass
+    keyboard_back_color: *color3 #键盘背景
+  #按键
+    key_border_color: *color3 #按键边框
+    key_text_color: *color1 #按键文本
+    key_symbol_color: *color5 #按键符号
+    key_back_color: bai.9.png #按键背景
+    hilited_key_text_color: *color1 #高亮按键文本
+    hilited_key_symbol_color: *color5 #高亮按键符号
+    hilited_key_back_color: *color2 #高亮按键背景
+  #功能键
+    off_key_text_color: *color1 #功能键文本
+    off_key_back_color: hui.9.png  #功能键背景
+    on_key_back_color: *color4 #功能键锁定背景
+    on_key_text_color: *color1 #功能键锁定文本
+    hilited_off_key_text_color: *color1 #高亮键文本
+    hilited_off_key_back_color: *color4 #高亮键背景
+  #回车键
+    rbc: lan.9.png   #回车背景
+    rhbc: *color6   #回车高亮背景
+    rtc: *color2     #回车文字颜色
+    rhtc: *color2    #回车高亮文字
+  #编码
+    text_color: *color8 #编码
+    text_back_color: *color2 #编码区&悬浮窗背景
+    hilited_text_color: *color8 #高亮编码
+    hilited_back_color: *color2 #高亮编码背景
+  #候选
+    back_color: *color3 #候选区背景
+    candidate_separator_color: *color3 #候选分割线
+    candidate_text_color: *color1 #候选文本
+    label_color: *color4 #候选序号
+    hilited_candidate_back_color: *color8 #高亮背景
+    hilited_candidate_text_color: *color2 #高亮文本
+    comment_text_color: *color4 #提示
+    hilited_comment_text_color: *color1 #高亮提示
+  #气泡
+    popup_back_color: *color3 #气泡背景
+    hilited_popup_back_color: *color2 #高亮气泡背景
+    hilited_popup_text_color: *color8 #高亮气泡文字
+
+  glass:
+    name: "玻璃"
+    light_scheme: default
+    __include: /preset_color_schemes/default
+    __patch: 
+      keyboard_back_color: d.png #键盘背景
+      key_back_color: bbl.9.png #按键背景
+      hilited_key_back_color: *color9 #高亮按键背景
+      off_key_text_color: *color1 #功能键文本
+      off_key_back_color: *color10 #功能键背景
+      on_key_back_color: *color9 #功能键锁定背景
+      hilited_off_key_back_color: *color9  #高亮功能键背景
+      rbc: *color10   #回车背景
+      rhbc: *color9   #回车高亮背景
+      rtc: *color8     #回车文字颜色
+      rhtc: *color8    #回车高亮文字
+
+# 最好保留一项，防止其他主题使用 __include 时无法加载
+fallback_colors:   #后备配色
+  candidate_background: key_back_color #候选栏背景
+ # root_background: keyboard_back_color # 整个键盘区+候选栏的背景图/色
+#  long_text_back_color: text_back_color #长文本按键的背景(剪贴板）
+
+#界面风格、功能开关
+style:
+#候选
+  candidate_text_size: 20  #候选字号
+  candidate_padding: 13  #候选项内边距
+  candidate_spacing: 1    #候选间隔
+  candidate_view_height: 27 #候选区高度
+  candidate_corner_radius: 10 #候选背景块圆角半径
+  candidate_text_vertical_bias: 0.4 #候选垂直偏移位置（仅 overlay 模式使用，需要间隙空间足够，范围 0.0~1.0，0.0=top，0.5=center，1.0=bottom）
+#提示
+  comment_text_size: 9 #提示字号
+  comment_height: 14 #（调节候选上下空间）
+  comment_position: overlay #位置：right/top/overlay
+  comment_vertical_bias: 1.0 #提示垂直偏移位置（仅 overlay 模式使用，需要间隙空间足够，范围 0.0~1.0，0.0=top，0.5=center，1.0=bottom）
+#按键
+  key_width: 10 #键宽
+  key_height: 40 #键高
+  key_text_size: 22 #键字号
+  symbol_text_size: 11 #符号字号
+  key_long_text_size: 19 #长标签字号
+  key_border: 1 #边框宽度
+  round_corner: 12 #按键圆角半径
+  shadow_radius: 0 #按键文字阴影
+  key_text_offset_x: 0 #按键文字左右偏移
+  key_text_offset_y: 0 #按键文字上下偏移
+  key_symbol_offset_x: 10 #上标左右偏移
+  key_symbol_offset_y: 5 #上标上下偏移
+  key_hint_offset_x: 0 #下标左右偏移
+  key_hint_offset_y: -3 #下标上下偏移
+  key_press_offset_x: 2 #按下横向偏移
+  key_press_offset_y: 2 #按下纵向偏移
+#键盘
+  reset_ascii_mode: false #显示键盘时重置为中文状态
+  horizontal_gap: 2 #按键竖缝
+  vertical_gap: 3 #按键横缝
+  keyboard_height: 250 #锁定键盘高度
+  keyboard_height_land: 220 #锁定横屏键盘高度
+  keyboard_padding_bottom: 15  #竖屏底边距
+  keyboard_padding_land_bottom: 8 #横屏底边距
+  keyboard_padding: 0    #竖屏两侧边距
+  keyboard_padding_land: 70  #横屏两侧边距
+#字体
+  key_font: [iconfont.ttf] #键盘字体
+  symbol_font: [iconfont.ttf] #符号字体
+  popup_font: [iconfont.ttf] #气泡字体
+#气泡
+  popup_width: 45 #气泡宽度
+  popup_height: 45 #preview气泡高度
+  popup_key_height: 47 #内键气泡高度
+  popup_bottom_margin: 73 #气泡标高
+  popup_text_size: 25 #气泡字号
+
+#预编辑文本
+preedit:                   # 预编辑文本视图参数
+  horizontal_padding: 8    # 横向内边距（整数）
+  alpha: 1                # 透明度（0-1，浮点）
+  top_end_radius: 5       # 末上端圆角（浮点）
+  foreground:             # 前景样式
+    font_size: 16          # 预编辑字体大小（浮点）
+ 
+#悬浮窗
+window:
+  insets:                    # 窗口内边距
+    vertical: 4              # 纵向内边距（整数）
+    horizontal: 6            # 横向内边距（整数）
+  item_padding:            # 候选项内边距
+    vertical: 6              # 纵向内边距（整数）
+    horizontal: 6           # 横向内边距（整数）
+#  min_width: 0           # 最小宽度（整数）
+  corner_radius: 10          # 圆角半径（浮点）
+  alpha: 1                  # 透明度（0-1，浮点）
+  foreground:               # 前景样式
+    label_font_size: 15      # 序号字体大小（浮点）
+    text_font_size: 20       # 文字字体大小（浮点）
+    comment_font_size: 12  # 注释字体大小（浮点）
+
+tool_bar:
+  button_spacing: 12 # 按钮间距
+  button_font: [iconfont.ttf] # 按钮字体
+  back_style: "\uE0A7" # 剪贴板提示返回按钮样式
+  # 左侧固定主按钮配置
+  primary_button:
+    size: [60, 40]      # 视图组件整体宽高 (支持: -1: 填充(matchParent), -2: 自适应(wrapContent))
+    background:   # 背景样式设置
+      type: rectangle     # 高亮形状 (可选: circle|rectangle)
+      corner_radius: 8   # 圆角半径
+      normal: *color7     # 正常状态背景颜色
+      highlight: *color3  # 高亮状态背景色
+      vertical_inset: 5      # 垂直方向内缩量
+      horizontal_inset: 8    # 水平方向内缩量
+    foreground:    # 前景内容设置
+      style: ""    # （内置图标以ic@开头） 前景样式可以为空，使用默认样式，按钮将显示为 action 的 label
+      normal: candidate_text_color  # 正常状态前景色 (本地图片不允许着色)
+      # highlight:        # 高亮状态前景色
+      padding: 8   # 前景内容与背景边界的内边距
+      font_size: 23
+    action: menu_keyboard   # 按钮点击事件
+    long_press_action: Settings
+
+  hide: &hide
+    size: [56, 40]
+    background:   # 背景样式设置
+      type: rectangle     # 高亮形状 (可选: circle|rectangle)
+      corner_radius: 8  # 圆角半径
+      normal: *color7     # 正常状态背景颜色
+      highlight: *color3   # 高亮状态背景色
+      # vertical_inset: 0        # 垂直方向内缩量
+      horizontal_inset: 10     # 水平方向内缩量
+    foreground:
+      style: ""
+      padding: 1   # 前景内容与背景边界的内边距
+      font_size: 32
+    action: Hide
+
+  bqfh3: &bqfh3
+    size: [42, 40]
+    background:   # 背景样式设置
+      type: rectangle     # 高亮形状 (可选: circle|rectangle)
+      corner_radius: 8   # 圆角半径
+      normal: *color7      # 正常状态背景颜色
+      highlight: *color3    # 高亮状态背景色
+      # vertical_inset: 0         # 垂直方向内缩量
+      # horizontal_inset: 0      # 水平方向内缩量
+    foreground:
+      style: "\uE018"
+      padding: 9   # 前景内容与背景边界的内边距
+      font_size: 21
+    action: Keyboard_bqfh3
+    long_press_action: Keyboard_symbols
+
+  layout: &layout
+    size: [42, 40]
+    background:   # 背景样式设置
+      type: rectangle     # 高亮形状 (可选: circle|rectangle)
+      corner_radius: 8   # 圆角半径
+      normal: *color7      # 正常状态背景颜色
+      highlight: *color3    # 高亮状态背景色
+      # vertical_inset: 0         # 垂直方向内缩量
+      # horizontal_inset: 0      # 水平方向内缩量
+    foreground:
+      style: ""
+      padding: 9   # 前景内容与背景边界的内边距
+      font_size: 21
+    action: Keyboard_layout
+    long_press_action: Menu
+
+  clip: &clip
+    size: [42, 40]
+    background:   # 背景样式设置
+      type: rectangle     # 高亮形状 (可选: circle|rectangle)
+      corner_radius: 8   # 圆角半径
+      normal: *color7      # 正常状态背景颜色
+      highlight: *color3    # 高亮状态背景色
+      # vertical_inset: 0         # 垂直方向内缩量
+      # horizontal_inset: 0      # 水平方向内缩量
+    foreground:
+      style: ""
+      padding: 9   # 前景内容与背景边界的内边距
+      font_size: 21
+    action: clipboard_window
+
+  redo: &redo
+    size: [42, 40]
+    background:   # 背景样式设置
+      type: rectangle     # 高亮形状 (可选: circle|rectangle)
+      corner_radius: 8   # 圆角半径
+      normal: *color7      # 正常状态背景颜色
+      highlight: *color3    # 高亮状态背景色
+      # vertical_inset: 0         # 垂直方向内缩量
+      # horizontal_inset: 5      # 水平方向内缩量
+    foreground:
+      style: ""
+      padding: 8   # 前景内容与背景边界的内边距
+      font_size: 22
+    action: redo
+
+  undo: &undo
+    size: [42, 40]
+    background:   # 背景样式设置
+      type: rectangle     # 高亮形状 (可选: circle|rectangle)
+      corner_radius: 8   # 圆角半径
+      normal: *color7      # 正常状态背景颜色
+      highlight: *color3    # 高亮状态背景色
+      # vertical_inset: 0         # 垂直方向内缩量
+      # horizontal_inset: 5      # 水平方向内缩量
+    foreground:
+      style: ""
+      padding: 8  # 前景内容与背景边界的内边距
+      font_size: 22
+    action: undo
+
+  # 右侧按钮列表（从右向左排列）
+  buttons: [ *hide, *bqfh3, *clip, *layout, *redo, *undo ]
+
+#键盘布局
+preset_keyboards:
+  default:
+    ascii_mode: 0
+    author: "暖暖"
+    keys:
+      - {click: q, long_click: 1}
+      - {click: w, long_click: 2}
+      - {click: e, long_click: 3}
+      - {click: r, long_click: 4}
+      - {click: t, long_click: 5}
+      - {click: y, long_click: 6}
+      - {click: u, long_click: 7}
+      - {click: i, long_click: 8}
+      - {click: o, long_click: 9}
+      - {click: p, long_click: 0}
+      - {width: 5}
+      - {click: a, long_click: select_all}
+      - {click: s, long_click: "@"}
+      - {click: d, long_click: "#"}
+      - {click: f, long_click: "{}{Left}"}
+      - {click: g, long_click: "%", swipe_down: date_time}
+      - {click: h, long_click: '"'}
+      - {click: j, long_click: "'"}
+      - {click: k, long_click: "[]{Left}"}
+      - {click: l, long_click: "(){Left}", swipe_down: "="}
+      - {width: 5}
+      - {click: Shift_L, long_click: Shift_L, label_symbol: ' ', lazy_double_click: Keyboard_letter, composing: delimiter, width: 12}
+      - {click: z, long_click: "`", width: 11}
+      - {click: x, long_click: cut}
+      - {click: c, long_click: copy}
+      - {click: v, long_click: paste, width: 11}
+      - {click: b, long_click: ":"}
+      - {click: n, long_click: ";"}
+      - {click: m, long_click: "_", width: 11}
+      - {click: BackSpace, swipe_up: Escape, swipe_down: Delete, swipe_left: Clear, width: 15}
+      - {click: Keyboard_number, popup: [CALCULATOR, Netdisk, TrimeWiki, Nightly, TrimeApp, MT, File_explorer, Weixin, Alipay, Jingdong, Meituan, Eleme, Hand_writing, Notes, Bing], composing: Pin, width: 15}
+      - {click: ",", label: " ，️", swipe_up: "?", composing: 2, popup: [Pin, Reset], width: 12}
+      - {click: space, label_symbol: 中, key_symbol_offset_x: 75, swipe_up: Up, swipe_down: Down, swipe_left: Left, swipe_right: Right, width: 46}
+      - {click: ".", label: " 。", swipe_up: "!", composing: 3, popup: [Forward, Backward], width: 12}
+      - {click: Return, popup: [Theme_settings, set_color_default, set_color_glass, set_theme], key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 15}
+    name: "26键默认布局"
+    lock: true
+    width: 10
+
+  letter:
+    ascii_mode: 1
+    lock: false
+    __include: /preset_keyboards/default
+    __patch: 
+      "keys/@21/lazy_double_click": Keyboard_last_lock
+      "keys/@32/label_symbol": "\uE073"
+
+  wubi86_double_key:
+    ascii_mode: 0
+    ascii_keyboard: letter
+    author: "讲文明"
+    height: 40
+    key_symbol_offset_x: 24
+    label_transform: uppercase  #大写标签 小写none
+    keys: 
+      #第一行
+      - {click: q, label: "Q   W", long_click: "_", swipe_right: w, swipe_down: 1, key_text_size: 22}
+      - {click: e, label: "E   R", long_click: "～", swipe_right: r, swipe_down: 2, key_text_size: 22}
+      - {click: t, label: "T   Y", long_click: "…", swipe_up: Time, swipe_right: y, swipe_down: 3, key_text_size: 22}
+      - {click: u, label: "U   I", long_click: ":", swipe_right: i, swipe_down: 4, key_text_size: 22}
+      - {click: o, label: "O   P", long_click: "、", swipe_right: p, swipe_down: 5, key_text_size: 22}
+      #第二行
+      - {width: 5}
+      - {click: a, label: "A   S", long_click: "(){Left}", swipe_right: s, swipe_down: 6, width: 18, key_text_size: 22}
+      - {click: d, label: "D   F", long_click: "@", swipe_up: Date, swipe_right: f, swipe_down: 7, width: 18, key_text_size: 22}
+      - {click: g, label: "G   H", long_click: '"', swipe_right: h, swipe_down: 8, width: 18, key_text_size: 22}
+      - {click: j, label: "J   K", long_click: "/", swipe_up: ChineseDate, swipe_right: k, swipe_down: 9, width: 18, key_text_size: 22}
+      - {click: l, long_click: "#", swipe_up: Ⅰ, swipe_down: 0, width: 17, key_text_size: 22}
+      - {width: 6}
+      #第三行
+      - {click: Shift_L, long_click: Shift_L, double_click: Keyboard_letter, label_symbol: ' ', composing: delimiter, swipe_up: RepeatCommit, swipe_down: Tab, width: 14}
+      - {click: x, label: "Z   X", long_click: cut, swipe_left: z, swipe_up: select_cut, width: 18, key_text_size: 22}
+      - {click: c, label: "C   V", long_click: copy, swipe_up: select_copy, swipe_right: v, width: 18, key_text_size: 22}
+      - {click: b, label: "B   N", long_click: paste, swipe_up: clipboard_window, swipe_right: n, width: 18, key_text_size: 22}
+      - {click: m, long_click: select_all, swipe_up: Ⅱ, width: 16, key_text_size: 22, key_symbol_offset_x: 21}
+      - {click: BackSpace, swipe_up: Escape, swipe_down: Delete, swipe_left: Clear, width: 16}
+      #第四行
+      - {click: Keyboard_number, composing: 4, popup: [CALCULATOR, Netdisk, TrimeWiki, Nightly, TrimeApp, MT, File_explorer, Weixin, Alipay, Jingdong, Meituan, Eleme, Hand_writing, Notes, Bing], width: 14, key_text_size: 19}
+      - {click: ",", label: " ，️", swipe_up: "?", composing: 3, popup: [Pin, Reset], width: 14, key_text_size: 19}
+      - {click: space, width: 42}
+      - {click: ".", label: " 。", swipe_up: "!", composing: 2, popup: [Forward, Backward], width: 14, key_text_size: 19}
+      - {click: Return, popup: [Theme_settings, set_color_default, set_color_glass, set_theme], key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 16}
+    lock: true
+    name: "五笔86双键"
+    width: 20
+
+  pinyin_jiugong:
+    ascii_mode: 0
+    ascii_keyboard: letter
+    author: "Uncle光 <467896722@qq.com>"
+    height: 40
+    key_symbol_offset_x: 30
+    keys:
+      #第一行
+      - {click: ";", long_click: "[", width: 17, key_symbol_offset_x: 20}
+      - {click: 1, label: "分词", long_click: "]", composing: delimiter}
+      - {click: 2, label: abc, long_click: "'", key_text_size: 19}
+      - {click: 3, label: def, long_click: "`", key_text_size: 19}
+      - {click: Mode_switch0, composing: Escape, popup: [CALCULATOR, Netdisk, TrimeWiki, Nightly, TrimeApp, MT, File_explorer, Weixin, Alipay, Jingdong, Meituan, Eleme, Hand_writing, Notes, Bing], swipe_down: Shift_L, width: 17}
+      #第二行
+      - {click: "-", long_click: "=", width: 17, key_symbol_offset_x: 20}
+      - {click: 4, label: ghi, long_click: Home, key_text_size: 19}
+      - {click: 5, label: jkl, long_click: select_all, key_text_size: 19}
+      - {click: 6, label: mno, long_click: End, key_text_size: 19}
+      - {click: Keyboard_letter, width: 17, key_text_size: 19}
+      #第三行
+      - {click: "/", long_click: "\\", width: 17, key_symbol_offset_x: 20}
+      - {click: 7, label: pqrs, long_click: copy, key_text_size: 19}
+      - {click: 8, label: tuv, long_click: paste, key_text_size: 19}
+      - {click: 9, label: wxyz, long_click: cut, key_text_size: 19}
+      - {click: BackSpace, swipe_up: Escape, swipe_down: Delete, swipe_left: Clear, width: 17}
+      #第四行
+      - {click: ",", label: " ，️", popup: [Pin, Reset], swipe_up: "?", width: 17}
+      - {click: ".", label: " 。", popup: [Forward, Backward], swipe_up: "!"}
+      - {click: space, swipe_up: Up, swipe_down: Down, key_text_size: 15}
+      - {click: 0, popup: ["{}{Left}", "(){Left}", "[]{Left}"]}
+      - {click: Return, popup: [Theme_settings, set_color_default, set_color_glass, set_theme], key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 17}
+    lock: true
+    name: "拼音九宫"
+    width: 22
+
+  number:
+    ascii_mode: 1
+    lock: false
+    name: "数字"
+    __include: /preset_keyboards/pinyin_jiugong
+    __patch: 
+      "keys/@2/key_text_size": ～
+      "keys/@3/key_text_size": ～
+      "keys/@6/key_text_size": ～
+      "keys/@7/key_text_size": ～
+      "keys/@8/key_text_size": ～
+      "keys/@11/key_text_size": ～
+      "keys/@12/key_text_size": ～
+      "keys/@13/key_text_size": ～
+      "keys/@4/click": Shift_L
+      "keys/@15":
+        click: Keyboard_default
+        width: 17
+        key_back_color: rbc
+        hilited_key_back_color: rhbc
+        key_text_color: rtc
+        hilited_key_text_color: rhtc
+      "keys/@16":
+        click: ','
+      "keys/@17":
+        click: '0'
+        popup: ["{}{Left}", "(){Left}", "[]{Left}"]
+        key_text_size": ～
+      "keys/@18":
+        click: '.'
+
+  layout:
+    ascii_mode: 0
+    author: "讲文明"
+    width: 15
+    height: 15
+    vertical_gap: 2
+    horizontal_gap: 5
+    keys: 
+      - {width: 100, height: 2}
+      - {width: 5}
+      - {click: wubi86_double_key_scheme, key_text_size: 28, key_text_offset_y: 3}
+      - {width: 10}
+      - {click: wubi86_scheme, key_text_size: 28, key_text_offset_y: 3}
+      - {width: 10}
+      - {click: pinyin_jiugong_scheme, key_text_size: 28, key_text_offset_y: 3}
+      - {width: 10}
+      - {click: pinyin_scheme, key_text_size: 28, key_text_offset_y: 3}
+      - {width: 5}
+      - {width: 5}
+      - {click: 无能键, label: 双键五笔, key_text_size: 12, height: 8, key_text_offset_y: -3, key_back_color: *color7, hilited_key_back_color: *color7}
+      - {width: 10}
+      - {click: 无能键, label: 五笔, key_text_size: 12, height: 8, key_text_offset_y: -3, key_back_color: *color7, hilited_key_back_color: *color7}
+      - {width: 10}
+      - {click: 无能键, label: 九宫拼音, key_text_size: 12, height: 8, key_text_offset_y: -3, key_back_color: *color7, hilited_key_back_color: *color7}
+      - {width: 10}
+      - {click: 无能键, label: 拼音, key_text_size: 12, height: 8, key_text_offset_y: -3, key_back_color: *color7, hilited_key_back_color: *color7}
+      - {width: 100, height: 27}
+      - {width: 33}
+      - {click: Keyboard_default, width: 34, height: 18}
+    lock: false
+    name: "布局"
+
+  symbols:
+    ascii_mode: 0
+    author: "暖暖"
+    height: 40
+    keys: 
+      - {click: 符号, long_click: 一, key_text_size: "16"}
+      - {click: 电脑, long_click: 二, key_text_size: "16"}
+      - {click: 天气, long_click: 三, key_text_size: "16"}
+      - {click: 音乐, long_click: 四, key_text_size: "16"}
+      - {click: 单位, long_click: 五, key_text_size: "16"}
+      - {click: 数学, long_click: 分数, key_text_size: "16"}
+      - {click: 八卦, long_click: 易经, key_text_size: "16"}
+      - {click: 希腊, long_click: 希腊大写, key_text_size: "16"}
+      - {click: 星号, long_click: 六, key_text_size: "16"}
+      - {click: 方块, long_click: 七, key_text_size: "16"}
+      - {click: 几何, long_click: 八, key_text_size: "16"}
+      - {click: 箭头, long_click: 九, key_text_size: "16"}
+      - {click: 货币, long_click: 十, key_text_size: "16"}
+      - {click: 下标, long_click: 上标, key_text_size: "16"}
+      - {click: 天体, long_click: 星座, key_text_size: "16"}
+      - {click: 罗马, long_click: 罗马大写, key_text_size: "16"}
+      - {click: 标点, long_click: 零, key_text_size: "16"}
+      - {click: 拼音, long_click: 竖标点, key_text_size: "16"}
+      - {click: 注音, long_click: 偏旁, key_text_size: "16"}
+      - {click: 韩文, long_click: 表情, key_text_size: "16"}
+      - {click: 假名, long_click: 片假名, key_text_size: "16"}
+      - {click: 麻将, long_click: 骰子, key_text_size: "16"}
+      - {click: 象棋, long_click: 扑克, key_text_size: "16"}
+      - {click: 俄语, long_click: 俄语大写, key_text_size: "16"}
+      - {click: Keyboard_default, height: 24, width: 20, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc}
+      - {click: Keyboard_number, width: 20, hilited_key_back_color: hilited_off_key_back_color}
+      - {click: space1, width: 20}
+      - {click: BackSpace, composing: Escape, swipe_left: Clear, width: 20}
+      - {click: Return1, width: 20, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc}
+    name: "各种符号"
+    width: 12.5
+  bqfh1:
+    ascii_mode: 0
+    author: "风花絮"
+    height: 30
+    keys: [{click: "，"}, {click: "。"}, {click: "？"}, {click: "！"}, {click: "："}, {click: "、"}, {click: "……"}, {click: "；"}, {click: Keyboard_symbols, key_text_size: 16}, {click: Keyboard_bqfh2, key_text_size: 14}, {click: "+"}, {click: "-"}, {click: "="}, {click: "·"}, {click: "｀"}, {click: "#"}, {click: "￥"}, {click: "%"}, {click: "ˉ"}, {click: "——"}, {click: "“”{Left}"}, {click: "‘’{Left}"}, {click: "ˆˇ{Left}"}, {click: "（）{Left}"}, {click: "〈〉{Left}"}, {click: "‹›{Left}"}, {click: "｛｝{Left}"}, {click: "『』{Left}"}, {click: "〖〗{Left}"}, {click: "［］{Left}"}, {click: "《》{Left}"}, {click: "〔〕{Left}"}, {click: "{}{Left}"}, {click: "「」{Left}"}, {click: "【】{Left}"}, {click: "～"}, {click: "@{Return}"}, {click: "*{Return}"}, {click: "&{Return}"}, {click: "﹏"}, {click: "﹋"}, {click: "﹌"}, {click: "︴"}, {click: "々"}, {click: "ᥬᩤ{Left}"}, {click: "｜"}, {click: "‖"}, {click: "‐"}, {click: "￣"}, {click: "¯"}, {click: Keyboard_default, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}, {click: Keyboard_bqsy1, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}, {click: Keyboard_bqsy2, width: 20}, {click: Keyboard_number, width: 20}, {click: BackSpace, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}]
+    name: "表情键1"
+    width: 10
+  bqfh2:
+    ascii_mode: 0
+    author: "风花絮"
+    height: 30
+    keys: [{click: "‰"}, {click: "‱"}, {click: "℉"}, {click: "€"}, {click: "£"}, {click: "¢"}, {click: "¤"}, {click: "₩"}, {click: Keyboard_symbols, key_text_size: 16}, {click: Keyboard_bqfh1, key_text_size: 14}, {click: "―"}, {click: "﹨"}, {click: "˜"}, {click: "﹍"}, {click: "﹎"}, {click: "〜"}, {click: "〰"}, {click: "°"}, {click: "℃"}, {click: "〝〞"}, {click: "﹙﹚{Left}", key_text_size: 14}, {click: "﹛﹜{Left}", key_text_size: 14}, {click: "﹤﹥{Left}", key_text_size: 14}, {click: "〘〙{Left}", key_text_size: 14}, {click: "︵︶{Left}", key_text_size: 14}, {click: "︷︸{Left}", key_text_size: 14}, {click: "︿﹀{Left}", key_text_size: 14}, {click: "︽︾{Left}", key_text_size: 14}, {click: "︹︺{Left}", key_text_size: 14}, {click: "︻︼{Left}", key_text_size: 14}, {click: "﹃﹄{Left}", key_text_size: 14}, {click: "〟"}, {click: "〃"}, {click: "﹐"}, {click: "﹒"}, {click: "﹑"}, {click: "﹖"}, {click: "﹗"}, {click: "﹘"}, {click: "﹔"}, {click: "﹕"}, {click: "﹪"}, {click: "﹢"}, {click: "﹣"}, {click: "﹦"}, {click: "﹫"}, {click: "﹠"}, {click: "﹩"}, {click: "﹡"}, {click: "﹟"}, {click: Keyboard_default, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}, {click: Keyboard_bqsy1, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}, {click: Keyboard_bqsy2, width: 20}, {click: Keyboard_number, width: 20}, {click: BackSpace, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}]
+    name: "表情键2"
+    width: 10
+  bqfh3:
+    ascii_mode: 1
+    author: "风花絮"
+    height: 30
+    keys: [{click: ","}, {click: .}, {click: "?"}, {click: "!"}, {click: Keyboard_symbols, key_text_size: 16, width: 20}, {click: ":"}, {click: "/"}, {click: "@"}, {click: ";"}, {click: "…"}, {click: "\""}, {click: "'"}, {click: "~"}, {click: "*"}, {click: "&"}, {click: "^"}, {click: "$"}, {click: "\\"}, {click: "|"}, {click: "#"}, {click: "(){Left}", width: 10}, {click: "<>{Left}", width: 10}, {click: "{}{Left}", width: 10}, {click: "[]{Left}", width: 10}, {click: "`", width: 10}, {click: "%", width: 10}, {click: "+", width: 10}, {click: "-", width: 10}, {click: "=", width: 20}, {click: Keyboard_default, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}, {click: Keyboard_bqsy1, width: 20}, {click: Keyboard_bqsy2, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}, {click: Keyboard_number, width: 20}, {click: BackSpace, key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 20}]
+    name: "表情键3"
+    width: 20
+    
+android_keys:
+  # 仅供编辑键盘时参考，实际不产生任何效果
+  when:
+    ascii: 西文標籤
+    paging: 翻頁標籤
+    has_menu: 選單標籤
+    composing: 輸入狀態標籤
+    #always: 始終
+    #hover: 划過
+    combo: 並擊
+    click: 單按
+    long_click: 長按
+    double_click: 双击
+    lazy_double_click: 双击
+    swipe_left: 左划
+    swipe_right: 右划
+    swipe_up: 上划
+    swipe_down: 下划
+  property:
+    width: 寬度
+    height: 高度
+    gap: 間隔
+    preview: 預覽
+    hint: 提示
+    label: 標籤
+    states: 狀態標籤
+    repeatable: 連續按鍵
+    functional: 功能鍵
+    shift_lock: Shift鎖定 #ascii_long: 英文長按中文單按鎖定, long: 長按鎖定, click: 單按鎖定
+  action:
+    command: 命令
+    option: 參數
+    select: 選擇
+    toggle: 狀態
+    send: 按鍵
+    text: 文字
+    commit: 上屏
+
+preset_keys:
+  # 安卓
+  BRIGHTNESS_DOWN: {label: 亮度-, send: BRIGHTNESS_DOWN}
+  BRIGHTNESS_UP: {label: 亮度+, send: BRIGHTNESS_UP}
+  CALCULATOR: {label: "\uE139", send: CALCULATOR}#计算器
+  CALENDAR: {label: 日历, send: CALENDAR}
+  CONTACTS: {label: 电话簿, send: CONTACTS}
+  ENVELOPE: {label: 信箱, send: ENVELOPE}
+  EXPLORER: {label: 浏览器, send: EXPLORER}
+  MUSIC: {label: 音乐, send: MUSIC}
+  POWER: {label: 电源, send: POWER}
+  SEARCH: {label: 搜寻, send: Find}
+  SLEEP: {label: 休眠, send: SLEEP}
+  VOICE_ASSIST: {label: 语音, functional: true, send: VOICE_ASSIST}
+  VOLUME_DOWN: {label: 音量-, send: VOLUME_DOWN}
+  VOLUME_UP: {label: 音量+, send: VOLUME_UP}
+  VOLUME_MUTE: {label: 静音, send: VOLUME_MUTE}
+  
+  # 编辑
+  Shift_L: {label: "\uE1B2", functional: true, send: Shift_L, shift_lock: long} #long中英状态长按锁定｜ascii_long英文長按中文單按鎖定｜click單按鎖定
+  Shift_L2: {label: "\uE186", functional: true, send: Shift_L, shift_lock: long}
+  Shift_L3: {functional: true, send: Shift_L, shift_lock: click} #供双击使用，仅shift_lock: click支持双击
+  Return: {label: "\uE034", functional: false, send: Return}
+  Return1: {label: "\uE030",  functional: false, send: Return}
+  Hide: {label: "\uE0D7", send: BACK}
+  BackSpace: {label: "\uE040", repeatable: true, functional: true, slide_delete: false, send: BackSpace}
+  space: {label: "\uE183", repeatable: false, preview: "\uE182", functional: false, slide_cursor: true, send: space}
+  space1: {label: "\uE182", repeatable: false, functional: true, slide_cursor: true, send: space}
+  Clear: {label: "\uE048", text: "{Control+a}{BackSpace}"}
+  Escape: {label: "\uE045", functional: false, send: Escape}
+  Home: {label: "\uE0c5", send: Control+Home, functional: false}
+  End: {label: "\uE0d5", send: Control+End, functional: false}
+  Page_Up: {label: "\uE0cd", send: Page_Up, functional: false}
+  Page_Down: {label: "\uE0dd", send: Page_Down, functional: false}
+  Left1: {label: '⇦', send: Control+Left, repeatable: true, functional: false}
+  Right1: {label: '⇨', send: Control+Right, repeatable: true, functional: false}
+  Left: {label: '←', send: Left, repeatable: true, functional: false}
+  Down: {label: '↓', send: Down, repeatable: true, functional: false}
+  Up: {label: '↑', send: Up, repeatable: true, functional: false}
+  Right: {label: '→', send: Right, repeatable: true, functional: false}
+  select_all: {label: "☑", functional: false, send: Control+a}
+  cut: {label: "✁", functional: false, send: Control+x}
+  copy: {label: "❐", functional: false, send: Control+c}
+  paste: {label: "⎗", functional: false, send: Control+v}
+  redo: {label: "\uE18D", functional: false, send: Control+Shift+z} #>=Android 6.0
+  undo: {label: "\uE18E", functional: false, send: Control+z} #>=Android 6.0
+  Tab: {label: Tab, repeatable: false, text: '	'}
+  Insert: {label: ⌤, send: Insert}
+  Delete: {label: ⌦, send: Delete, functional: false}
+  RepeatCommit: {label: "\uE18A", command: commit, option: "%1$s"}   #重复输入上屏内容
+  delimiter: {label: 分词, text: "'"}
+  select_cut: {label: ☑✁, text: '{Control+a}{cut}'}
+  select_copy: {label: ☑❐, text: '{Control+a}{copy}'}
+  Forward: {label: 前移, send: Control+j}
+  Backward: {label: 后移, send: Control+k}
+  Pin: {label: 置顶, send: Control+p}
+  Reset: {label: 重置, send: Control+l}
+  无能键: {send: ""}
+
+  # rime组合键
+  F4: {label: 方案菜单, send: F4}
+  BackToPreviousSyllable: {label: 删音节, send: Control+BackSpace}
+  CommitRawInput: {label: 编码, send: Control+Return} #上屏原始输入
+  CommitScriptText: {label: 编码, send: Shift+Return} #上屏变换后输入
+  CommitComment: {label: 编码, send: Control+Shift+Return} #上屏候选项备注
+  DeleteCandidate: {label: 删词, send: Control+Delete, functional: false}
+  
+  #切换键盘
+  Keyboard_layout: {label: "\uE101", functional: false, send: Eisu_toggle, select: layout}
+  Keyboard_pinyin_jiugong: {label: "\uE10E", functional: false, send: Eisu_toggle, select: pinyin_jiugong}
+  Keyboard_wubi86_double_key: {label: "\uE066", functional: false, send: Eisu_toggle, select: wubi86_double_key}
+  Keyboard_letter: {label: abc, functional: true, send: Eisu_toggle, select: letter}
+  Keyboard_default: {label: "ic@close", functional: false, send: Eisu_toggle, select: .default}
+  Keyboard_switch: {label: 键盘, functional: true, send: Eisu_toggle, select: .next}
+  Keyboard_number: {label: 123, preview: "\uE012", functional: true, send: Eisu_toggle, select: number}
+  Keyboard_numberb: {label: "\uE1C1", functional: false, send: Eisu_toggle, select: numberb}
+  Keyboard_symbols: {label: "\uE01C", functional: false, send: Eisu_toggle, select: symbols}
+  Keyboard_next: {label: 后退, functional: false, send: Eisu_toggle, select: .next}
+  Keyboard_last: {label: "\uE031", functional: false, send: Eisu_toggle, select: .last}
+  Keyboard_last_lock: {label: "\uE073", send: Eisu_toggle, select: .last_lock}
+  menu_keyboard: {label: "\uE03E", send: function, command: menu_keyboard}
+  clipboard_window: {label: "\uE099", send: function, command: "clipboard_window"}
+  set_color_default: {label: 标配, send: function, command: set_color_scheme, option: "default"}
+  set_color_glass: {label: 玻璃, send: function, command: set_color_scheme, option: "glass"}
+  set_theme: {label: "\uE189", send: function, command: set_theme, option: ""} #空参数刷新主题
+  pinyin_scheme: {label: "\uE107", send: Shift+Control+6}  #一键切拼音方案
+  wubi86_scheme: {label: "\uE109", send: Shift+Control+7}  #一键切五笔方案
+  wubi86_double_key_scheme: {label: "\uE109", send: Shift+Control+8}  #一键切双键五笔方案
+  pinyin_jiugong_scheme: {label: "\uE10E", send: Shift+Control+9}  #一键切九宫拼音方案
+
+  # rime状态
+  Mode_switch0: {toggle: ascii_mode, functional: true, send: Mode_switch, states: [123, 中]}
+  Mode_switch: {toggle: ascii_mode, functional: false, send: Mode_switch, states: [中, En]}
+  Zenkaku_Hankaku: {toggle: full_shape, send: Mode_switch, states: [半角, 全角]}
+  Henkan: {toggle: simplification, send: Mode_switch, states: [汉字, 漢字]}
+  Charset_switch: {toggle: charset_filter, send: Mode_switch, states: [常用, 扩展]}
+  Punct_switch: {toggle: ascii_punct, send: Mode_switch, states: [。，, ．，]}
+  orientation_switch: {toggle: _linear, send: Mode_switch, states: [纵向, 横向]}
+  Spell_switch: {toggle: 86wubi_spelling, send: Mode_switch, states: [拆, 扌斥]}
+
+  # trime设置
+  IME_switch: {label: "\uE101", send: LANGUAGE_SWITCH} #彈出對話框選擇輸入法
+  IME_last: {label: 上一输入法, send: LANGUAGE_SWITCH, select: .last} #直接切換到上一輸入法
+  IME_next: {label: 下一输入法, send: LANGUAGE_SWITCH, select: .next} #直接切換到下一輸入法
+  Schema_switch: {label: 下一方案, functional: false, send: Control+Shift+1}
+  Schema_Eng: {label: En, functional: true, send: Control+Shift+0}
+  Theme_settings: {label: "\uE131", send: SETTINGS, option: "theme"}
+  Color_switch: {label: "\uE136", functional: false, send: PROG_RED}
+  Help: {label: "\uE129", send: Help}
+  Info: {label: "\uE3c6", send: INFO} #关于
+  Menu: {label: "\uE129", functional: false, send: Menu}
+  Settings: {label: "\uE120", functional: false, send: SETTINGS}
+  Deploy: {label: "\uE18B", send: function, command: apply, option: "DEPLOY"}
+  Sync: {label: 同步, send: function, command: apply, option: "SYNC_USER_DATA"}
+  UpdateConfig: {label: "\uE196", send: function, command: apply, option: "UPDATE_CONFIG"}
+  
+  # trime命令
+  ChineseDate: {label: '农历', send: function, command: date, option: 'zh_CN@calendar=chinese'} #农历等日期（>=Android 7.0）：date 语言@calendar=历法 格式。具体参见https://developer.android.com/reference/android/icu/util/Calendar.html
+  Date: {label: 日期, send: function, command: date, option: "yyyy.MM.dd"}
+  Time: {label: 時間, send: function, command: date, option: "HH:mm:ss"} #時間： date 格式
+  TrimeApp: {label: "\uE03E", send: function, command: run, option: "com.osfans.trime"} #運行程序: run 包名
+  TrimeCmp: {label: 組件, send: function, command: run, option: "com.osfans.trime/.ui.main.PrefMainActivity"} #運行程序指定組件: run 包名/組件名
+  TrimeWiki: {command: run, label: "\uE11B", option: "https://github.com/osfans/trime/wiki/Theme-Configuration-(New)", send: function} #trime详解
+  Homepage: {label: "\uE5F3", send: function, command: run, option: "https://github.com/osfans/trime"} #查看主页
+  Wiki: {label: 維基, send: function, command: run, option: "https://zh.wikipedia.org/wiki/%s"} #搜索網頁: %s或者%1$s爲當前字符
+  Google: {label: 谷歌, send: function, command: run, option: "https://www.google.com/search?q=%s"} #搜索網頁: %s或者%1$s爲當前字符
+  MoeDict: {label: 萌典, send: function, command: run, option: "https://www.moedict.tw/%3$s"} #搜索網頁: %3$s爲光標前字符
+  Baidu: {label: 百度搜索, send: function, command: run, option: "https://www.baidu.com/s?wd=%4$s"} #搜索網頁: %4s爲光標前所有字符
+  Zdic: {label: 漢典, send: function, command: run, option: "http://www.zdic.net/sousuo/?q=%1$s"} #搜索網頁: %s或者%1$s爲當前字符
+  Zdic2: {label: 漢典, send: function, command: run, option: "http://www.zdic.net/sousuo/?q=%2$s"} #搜索網頁: %2$s爲當前輸入的編碼
+  WebSearch: {label: 搜索網頁, send: function, command: web_search, option: "%4$s"} #搜索，其他view、dial、edit、search等intent，參考安卓的intent文檔：https://developer.android.com/reference/android/content/Intent.html
+  Nightly: {label: "\uE5F3", send: function, command: run, option: "https://github.com/osfans/trime/releases/tag/nightly"} #夜版
+  Netdisk: {label: "\uE05f", send: function, command: run, option: "http://trime365.ysepan.com"} #网盘
+  Bing: {label: "\uE1A0", send: function, command: run, option: "http://cn.bing.com/search?q=%s"} 
+  Hand_writing: {label: "\uE06A", send: function, command: run, option: "https://chinesehandwritinggpt.com/zhs"} 
+  MT: {label: "\uE67B", send: function, command: run, option: "bin.mt.plus.canary"}
+  File_explorer: {label: "\uE67C", send: function, command: run, option: "com.android.fileexplorer"}
+  Notes: {label: "\uE1A7", send: function, command: run, option: "com.miui.notes"}
+  Weixin: {label: "\uE5FF", send: function, command: run, option: "com.tencent.mm"}
+  Alipay: {label: "\uE63F", send: function, command: run, option: "com.eg.android.AlipayGphone"}
+  Jingdong: {label: "\uE653", send: function, command: run, option: "com.jingdong.app.mall"}
+  Meituan: {label: "\uE641", send: function, command: run, option: "com.sankuai.meituan.takeoutnew"}
+  Eleme: {label: "\uE642", send: function, command: run, option: "me.ele"}
+
+   # 表情键自定义
+  Keyboard_bqfh: {label: "\uE019", functional: false, send: Eisu_toggle, select: bqfh1}
+  Keyboard_bqfh1: {label: "上页", functional: false, send: Eisu_toggle, select: bqfh1}
+  Keyboard_bqfh2: {label: "下页", functional: false, send: Eisu_toggle, select: bqfh2, key_text_size: "14"}
+  Keyboard_bqfh3: {label: "\uE019", functional: false, send: Eisu_toggle, select: bqfh3, key_text_size: "14"}
+  Keyboard_bqsy1: {label: "中符", functional: false, send: Eisu_toggle, select: bqfh1, key_text_size: "14"}
+  Keyboard_bqsy2: {label: "英符", functional: false, send: Eisu_toggle, select: bqfh3, key_text_size: "14"}
+
+  #符号
+  符号: {text: '{Escape}/fh', label: 符号, functional: false}
+  电脑: {text: '{Escape}/dn', label: 电脑, functional: false}
+  象棋: {text: '{Escape}/xq', label: 象棋, functional: false}
+  麻将: {text: '{Escape}/mj', label: 麻将, functional: false}
+  骰子: {text: '{Escape}/sz', label: 骰子, functional: false}
+  扑克: {text: '{Escape}/pk', label: 扑克, functional: false}
+  天气: {text: '{Escape}/tq', label: 天气, functional: false}
+  音乐: {text: '{Escape}/yy', label: 音乐, functional: false}
+  八卦: {text: '{Escape}/bg', label: 八卦, functional: false}
+  易经: {text: '{Escape}/lssg', label: 易经, functional: false}
+  天体: {text: '{Escape}/tt', label: 天体, functional: false}
+  星座: {text: '{Escape}/xz', label: 星座, functional: false}
+  星号: {text: '{Escape}/xh', label: 星号, functional: false}
+  方块: {text: '{Escape}/fk', label: 方块, functional: false}
+  几何: {text: '{Escape}/jh', label: 几何, functional: false}
+  箭头: {text: '{Escape}/jt', label: 箭头, functional: false}
+  数学: {text: '{Escape}/sx', label: 数学, functional: false}
+  上标: {text: '{Escape}/sb', label: 上标, functional: false}
+  下标: {text: '{Escape}/xb', label: 下标, functional: false}
+  单位: {text: '{Escape}/dw', label: 单位, functional: false}
+  货币: {text: '{Escape}/hb', label: 货币, functional: false}
+  拼音: {text: '{Escape}/py', label: 拼音, functional: false}
+  注音: {text: '{Escape}/zy', label: 注音, functional: false}
+  假名: {text: '{Escape}/jm', label: 假名, functional: false}
+  片假名: {text: '{Escape}/pjm', label: 片假名, functional: false}
+  韩文: {text: '{Escape}/hw', label: 韩文, functional: false}
+  希腊: {text: '{Escape}/xl', label: 希腊, functional: false}
+  希腊大写: {text: '{Escape}/xld', label: 大写, functional: false}
+  罗马: {text: '{Escape}/lm', label: 罗马, functional: false}
+  罗马大写: {text: '{Escape}/lmd', label: 大写, functional: false}
+  俄语: {text: '{Escape}/ey', label: 俄语, functional: false}
+  俄语大写: {text: '{Escape}/eyd', label: 大写, functional: false}
+  表情: {text: '{Escape}/bq', label: "\uE56C"}
+  一: {text: '{Escape}/1', label: 1}
+  二: {text: '{Escape}/2', label: 2}
+  三: {text: '{Escape}/3', label: 3}
+  四: {text: '{Escape}/4', label: 4}
+  五: {text: '{Escape}/5', label: 5}
+  六: {text: '{Escape}/6', label: 6}
+  七: {text: '{Escape}/7', label: 7}
+  八: {text: '{Escape}/8', label: 8}
+  九: {text: '{Escape}/9', label: 9}
+  零: {text: '{Escape}/0', label: 0}
+  十: {text: '{Escape}/10', label: 10}
+  分数: {text: '{Escape}/fs', label: 分数, functional: false}
+  标点: {text: '{Escape}/bd', label: 标点, functional: false}
+  偏旁: {text: '{Escape}/pp', label: 偏旁, functional: false}
+  竖标点: {text: '{Escape}/bdz', label: 竖标, functional: false}
