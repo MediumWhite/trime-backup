@@ -1,7 +1,7 @@
 # Trime default style settings
 # encoding: utf-8
 
-config_version: "4.5"
+config_version: "5.0"
 name: "树新风"
 author: "讲文明"
 
@@ -44,7 +44,7 @@ preset_color_schemes:
     rtc: *color2 #蓝按键文字颜色
     rhtc: *color2 #蓝按键高亮文字
   #编码
-    text_color: *color1 #编码
+    text_color: *color8 #编码
     text_back_color: *color2 #编码/浮窗背景
     hilited_text_color: *color8 #高亮编码
   #候选
@@ -116,7 +116,7 @@ style:
   key_press_offset_x: 2 #按下横向偏移
   key_press_offset_y: 2 #按下纵向偏移
 #键盘
-  reset_ascii_mode_on_focus_change: false #焦点变更弹起输入法软键盘时，重置 ascii_mode
+  reset_ascii_mode_on_focus_change: true #焦点变更弹起输入法软键盘时，重置 ascii_mode
   horizontal_gap: 2 #按键间距
   vertical_gap: 3 #按键行距
   keyboard_height: 250 #锁定键盘高度
@@ -147,24 +147,24 @@ preedit: #预编辑文本视图参数
 #悬浮窗
 window:
   insets: #窗口内边距
-    vertical: 4 #纵向内边距（整数）
-    horizontal: 4 #横向内边距（整数）
+    vertical: 5 #纵向（整数）
+    horizontal: 5 #横向（整数）
   item_padding: #候选项内边距
-    vertical: 7 #纵向内边距（整数）
-    horizontal: 11 #横向内边距（整数）
+    vertical: 5 #纵向（整数）
+    horizontal: 11 #横向（整数）
   foreground: #前景样式
     label_font_size: 13 #序号字体大小（浮点）
     text_font_size: 20 #文字字体大小（浮点）
     comment_font_size: 10 #注释字体大小（浮点）
 #  min_width: 0     #最小宽度（整数）
   corner_radius: 11 #圆角半径（浮点）
-  alpha: 0.9 #透明度（0-1，浮点）
+  alpha: 0.95 #透明度（0-1，浮点）
   border: 1 #边框宽度（整数）
-  shadow: 3 #阴影半径（浮点）
+  shadow: 3.3 #阴影半径（浮点）
 
 #工具栏
 tool_bar:
-  button_spacing: 12 #按钮间距
+  button_spacing: 6 #按钮间距
   button_font: [iconfont.ttf] #按钮字体
   back_style: "\uE0A7" #返回按钮样式
 #左侧固定主按钮
@@ -185,9 +185,9 @@ tool_bar:
       font_size: 23 #字体尺寸
     action: menu_keyboard #按钮点击事件
     long_press_action: Settings #按钮长按事件
-#①隐藏键盘
+#隐藏键盘
   hide: &hide
-    size: [56, 40]
+    size: [55, 40]
     background:
       type: rectangle
       corner_radius: 8
@@ -200,21 +200,20 @@ tool_bar:
       padding: 1
       font_size: 32
     action: Hide
-#②符号&扩展符号
-  bqfh3: &bqfh3
-    size: [42, 40]
+#恢复
+  redo: &redo
+    size: [42, 31]
     background:
       type: rectangle
       corner_radius: 8
       normal: *color7
       highlight: *color3
     foreground:
-      style: "\uE018"
-      padding: 9
-      font_size: 21
-    action: Keyboard_bqfh3
-    long_press_action: Keyboard_symbols
-#③键盘布局&方案菜单
+      style: "r1.png"
+      padding: 8
+      font_size: 22
+    action: redo
+#键盘布局&方案菜单
   layout: &layout
     size: [42, 40]
     background:
@@ -228,7 +227,21 @@ tool_bar:
       font_size: 21
     action: Keyboard_layout
     long_press_action: Menu
-#④剪贴板
+#符号&扩展符号
+  bqfh3: &bqfh3
+    size: [42, 40]
+    background:
+      type: rectangle
+      corner_radius: 8
+      normal: *color7
+      highlight: *color3
+    foreground:
+      style: "\uE018"
+      padding: 9
+      font_size: 20
+    action: Keyboard_bqfh3
+    long_press_action: Keyboard_symbols
+#剪贴板
   clip: &clip
     size: [42, 40]
     background:
@@ -239,10 +252,10 @@ tool_bar:
     foreground:
       style: ""
       padding: 9
-      font_size: 21
+      font_size: 20
     action: clipboard_window
-#⑤撤消
-  redo: &redo
+#中/英切换
+  toggle: &toggle
     size: [42, 40]
     background:
       type: rectangle
@@ -250,30 +263,31 @@ tool_bar:
       normal: *color7
       highlight: *color3
     foreground:
-      style: ""
+      style: "\uE076"
       padding: 8
-      font_size: 22
-    action: redo
-#⑥重做
+      font_size: 23
+    action: Keyboard_ascii
+#撤消
   undo: &undo
-    size: [42, 40]
+    size: [42, 31]
     background:
       type: rectangle
       corner_radius: 8
       normal: *color7
       highlight: *color3
     foreground:
-      style: ""
+      style: "u1.png"
       padding: 8
       font_size: 22
     action: undo
 #右侧按钮列表（从右向左排列）
-  buttons: [*hide, *bqfh3, *clip, *layout, *redo, *undo]
+  buttons: [*hide, *redo, *layout, *bqfh3, *clip, *toggle, *undo]
 
 #键盘布局
 preset_keyboards:
   default:
     ascii_mode: 0
+    ascii_keyboard: ascii
     author: "暖暖"
     keys:
     #第一行
@@ -290,28 +304,28 @@ preset_keyboards:
     #第二行
       - {width: 5}
       - {click: a, long_click: select_all}
-      - {click: s, long_click: "@"}
-      - {click: d, long_click: "#"}
-      - {click: f, long_click: "{}{Left}"}
-      - {click: g, long_click: "%", swipe_down: date_time}
-      - {click: h, long_click: '"'}
+      - {click: s, long_click: "/"}
+      - {click: d, long_click: "\\"}
+      - {click: f, long_click: "°"}
+      - {click: g, long_click: "℃", swipe_down: date_time}
+      - {click: h, long_click: "…"}
       - {click: j, long_click: "'"}
-      - {click: k, long_click: "[]{Left}"}
-      - {click: l, long_click: "(){Left}", swipe_down: "="}
+      - {click: k, long_click: "["}
+      - {click: l, long_click: "]"}
       - {click: ""} #强制换行
     #第三行
-      - {click: Shift_L, long_click: Shift_L, label_symbol: ' ', lazy_double_click: Keyboard_letter, composing: delimiter, swipe_up: RepeatCommit, width: 12}
+      - {click: Shift_L, long_click: Shift_L, label_symbol: ' ', composing: delimiter, swipe_up: RepeatCommit, width: 12}
       - {click: z, long_click: "`", width: 11}
       - {click: x, long_click: cut}
       - {click: c, long_click: copy}
       - {click: v, long_click: paste, width: 11}
-      - {click: b, long_click: ":"}
+      - {click: b, long_click: "="}
       - {click: n, long_click: ";"}
-      - {click: m, long_click: "_", width: 11}
+      - {click: m, long_click: "-", width: 11}
       - {click: BackSpace, swipe_up: Escape, swipe_down: Delete, swipe_left: Clear, width: 15}
     #第四行
-      - {click: Keyboard_number, popup: [CALCULATOR, Netdisk, TrimeWiki, Nightly, TrimeApp, MT, File_explorer, Weixin, Alipay, Jingdong, Meituan, Eleme, Hand_writing, Notes, Bing], composing: Pin, width: 15}
-      - {click: ",", label: " ，️", swipe_up: "?", composing: 2, popup: [Pin, Reset], width: 12}
+      - {click: Keyboard_number, popup: [CALCULATOR, Netdisk, TrimeWiki, Nightly, TrimeApp, MT, File_explorer, Weixin, Alipay, Jingdong, Meituan, Eleme, Hand_writing, Notes, Bing], composing: 4, width: 15}
+      - {click: ",", label: " ，️", swipe_up: "?", composing: 3, popup: [Pin, Reset], width: 12}
       - {click: space, label_symbol: 中, key_symbol_offset_x: 75, swipe_up: Up, swipe_down: Down, swipe_left: Left, swipe_right: Right, width: 46}
       - {click: ".", label: " 。", swipe_up: "!", composing: 3, popup: [Forward, Backward], width: 12}
       - {click: Return, popup: [Theme_settings, set_color_default, set_color_glass, set_theme], key_back_color: rbc, hilited_key_back_color: rhbc, key_text_color: rtc, hilited_key_text_color: rhtc, width: 15}
@@ -319,18 +333,18 @@ preset_keyboards:
     lock: true
     width: 10
 
-  letter:
+  ascii:
     ascii_mode: 1
     name: "26键英文字母"
     lock: false
     __include: /preset_keyboards/default
     __patch: 
-      "keys/@21/lazy_double_click": Keyboard_last_lock
       "keys/@32/label_symbol": "\uE073"
+      "ascii_keyboard": ~
 
   wubi86_double_key:
     ascii_mode: 0
-    ascii_keyboard: letter
+    ascii_keyboard: ascii
     author: "讲文明"
     height: 40
     key_symbol_offset_x: 24
@@ -351,7 +365,7 @@ preset_keyboards:
       - {click: l, long_click: "#", swipe_up: Ⅰ, swipe_down: 0, width: 17, key_text_size: 22}
       - {click: ""} #强制换行
     #第三行
-      - {click: Shift_L, long_click: Shift_L, double_click: Keyboard_letter, label_symbol: ' ', composing: delimiter, swipe_up: RepeatCommit, swipe_down: Tab, width: 14}
+      - {click: Shift_L, long_click: Shift_L, label_symbol: ' ', composing: delimiter, swipe_up: RepeatCommit, swipe_down: Tab, width: 14}
       - {click: x, label: "Z   X", long_click: cut, swipe_left: z, swipe_up: select_cut, width: 18, key_text_size: 22}
       - {click: c, label: "C   V", long_click: copy, swipe_up: select_copy, swipe_right: v, width: 18, key_text_size: 22}
       - {click: b, label: "B   N", long_click: paste, swipe_up: clipboard_window, swipe_right: n, width: 18, key_text_size: 22}
@@ -369,23 +383,23 @@ preset_keyboards:
 
   pinyin_jiugong:
     ascii_mode: 0
-    ascii_keyboard: letter
-    author: "Uncle光 <467896722@qq.com>"
+    ascii_keyboard: ascii
+    author: "Uncle光"
     height: 40
     key_symbol_offset_x: 30
     keys:
     #第一行
       - {click: ";", long_click: "[", width: 17, key_symbol_offset_x: 20}
-      - {click: 1, label: "分词", long_click: "]", composing: delimiter}
+      - {click: 1, label: "分词", long_click: "]", composing: delimiter, key_text_size: 19}
       - {click: 2, label: abc, long_click: "'", key_text_size: 19}
       - {click: 3, label: def, long_click: "`", key_text_size: 19}
-      - {click: Mode_switch0, composing: Escape, popup: [CALCULATOR, Netdisk, TrimeWiki, Nightly, TrimeApp, MT, File_explorer, Weixin, Alipay, Jingdong, Meituan, Eleme, Hand_writing, Notes, Bing], swipe_up: RepeatCommit, swipe_down: Shift_L, width: 17}
+      - {click: Mode_switch0, composing: Escape, popup: [CALCULATOR, Netdisk, TrimeWiki, Nightly, TrimeApp, MT, File_explorer, Weixin, Alipay, Jingdong, Meituan, Eleme, Hand_writing, Notes, Bing], swipe_up: RepeatCommit, width: 17}
     #第二行
       - {click: "-", long_click: "=", width: 17, key_symbol_offset_x: 20}
       - {click: 4, label: ghi, long_click: Home, key_text_size: 19}
       - {click: 5, label: jkl, long_click: select_all, key_text_size: 19}
       - {click: 6, label: mno, long_click: End, key_text_size: 19}
-      - {click: Keyboard_letter, width: 17, key_text_size: 19}
+      - {click: Shift_L, long_click: Shift_L, label_symbol: " ", width: 17}
     #第三行
       - {click: "/", long_click: "\\", width: 17, key_symbol_offset_x: 20}
       - {click: 7, label: pqrs, long_click: copy, key_text_size: 19}
@@ -410,17 +424,13 @@ preset_keyboards:
     __patch: 
       "keys/@2/key_text_size": ～
       "keys/@3/key_text_size": ～
+      "keys/@4/click": Keyboard_ascii
       "keys/@6/key_text_size": ～
       "keys/@7/key_text_size": ～
       "keys/@8/key_text_size": ～
       "keys/@11/key_text_size": ～
       "keys/@12/key_text_size": ～
       "keys/@13/key_text_size": ～
-      "keys/@4": 
-        click: Shift_L
-        long_click: Shift_L
-        label_symbol: " "
-        width: 17
       "keys/@15":
         click: Keyboard_default
         width: 17
@@ -441,9 +451,7 @@ preset_keyboards:
   layout:
     ascii_mode: 0
     author: "讲文明"
-    width: 15
     height: 15
-    vertical_gap: 2
     horizontal_gap: 5
     keys: 
       - {width: 100, height: 2}
@@ -464,11 +472,14 @@ preset_keyboards:
       - {click: 无能键, label: 九宫拼音, key_text_size: 12, height: 8, key_text_offset_y: -3, key_back_color: *color7, hilited_key_back_color: *color7}
       - {width: 10}
       - {click: 无能键, label: 拼音, key_text_size: 12, height: 8, key_text_offset_y: -3, key_back_color: *color7, hilited_key_back_color: *color7}
-      - {width: 100, height: 27}
+      - {width: 100, height: 25}
       - {width: 33}
       - {click: Keyboard_default, width: 34, height: 18}
+      - {width: 100, height: 2}
     lock: false
     name: "键盘布局"
+    vertical_gap: 2
+    width: 15
 
   symbols:
     ascii_mode: 0
@@ -638,7 +649,7 @@ preset_keys:
   Keyboard_layout: {label: "\uE101", functional: false, send: Eisu_toggle, select: layout}
   Keyboard_pinyin_jiugong: {label: "\uE10E", functional: false, send: Eisu_toggle, select: pinyin_jiugong}
   Keyboard_wubi86_double_key: {label: "\uE066", functional: false, send: Eisu_toggle, select: wubi86_double_key}
-  Keyboard_letter: {label: abc, functional: true, send: Eisu_toggle, select: letter}
+  Keyboard_ascii: {label: abc, functional: true, send: Eisu_toggle, select: .ascii}
   Keyboard_default: {label: "ic@close", functional: false, send: Eisu_toggle, select: .default}
   Keyboard_switch: {label: 键盘, functional: true, send: Eisu_toggle, select: .next}
   Keyboard_number: {label: 123, preview: "\uE012", functional: true, send: Eisu_toggle, select: number}
