@@ -116,7 +116,7 @@ style:
   key_press_offset_x: 2 #按下横向偏移
   key_press_offset_y: 2 #按下纵向偏移
 #键盘
-  reset_ascii_mode_on_focus_change: true #焦点变更弹起软键盘时重置 ascii_mode
+  reset_ascii_mode_on_focus_change: false #焦点变更弹起软键盘时重置 ascii_mode
   horizontal_gap: 2 #按键间距
   vertical_gap: 3 #按键行距
   keyboard_height: 250 #锁定键盘高度
@@ -164,7 +164,7 @@ window:
 
 #工具栏
 tool_bar:
-  button_spacing: 6 #按钮间距
+  button_spacing: 8 #按钮间距
   button_font: [iconfont.ttf] #按钮字体
   back_style: "\uE0A7" #返回按钮样式
 #左侧固定主按钮
@@ -172,7 +172,7 @@ tool_bar:
     size: [60, 40] #视图组件整体宽高
     background: #背景样式设置
       type: rectangle #高亮形状(可选:circle|rectangle)
-      corner_radius: 8 #圆角半径
+      corner_radius: 10 #圆角半径
       normal: *color7 #正常状态背景颜色
       highlight: *color3 #高亮状态背景色
       vertical_inset: 5 #垂直方向内缩量
@@ -181,37 +181,37 @@ tool_bar:
       style: "" #（内置图标以ic@开头）前景样式为空，将显示为 action 的 label
       normal: candidate_text_color #正常状态前景色
       # highlight:     #高亮状态前景色
-      padding: 8 #前景内容与背景边界的内边距
-      font_size: 23 #字体尺寸
+      padding: 7 #前景内容与背景边界的内边距
+      font_size: 24 #字体尺寸
     action: menu_keyboard #按钮点击事件
     long_press_action: Settings #按钮长按事件
 #隐藏键盘
   hide: &hide
-    size: [53, 40]
+    size: [50, 40]
     background:
       type: rectangle
-      corner_radius: 8
+      corner_radius: 10
       normal: *color7
       highlight: *color3
       # vertical_inset: 0
-      horizontal_inset: 10
+      horizontal_inset: 8
     foreground:
       style: ""
       padding: 1
-      font_size: 32
+      font_size: 33
     action: Hide
 #键盘布局&方案菜单
   layout: &layout
     size: [42, 40]
     background:
       type: rectangle
-      corner_radius: 8
+      corner_radius: 10
       normal: *color7
       highlight: *color3
     foreground:
       style: ""
-      padding: 9
-      font_size: 21
+      padding: 8
+      font_size: 22
     action: Keyboard_layout
     long_press_action: Menu
 #符号&扩展符号
@@ -219,9 +219,9 @@ tool_bar:
     size: [42, 40]
     background:
       type: rectangle
-      corner_radius: 8
+      corner_radius: 10
       normal: *color7
-      highlight: *color3
+      highlight: *color3 
     foreground:
       style: "\uE018"
       padding: 9
@@ -233,7 +233,7 @@ tool_bar:
     size: [42, 40]
     background:
       type: rectangle
-      corner_radius: 8
+      corner_radius: 10
       normal: *color7
       highlight: *color3
     foreground:
@@ -246,7 +246,7 @@ tool_bar:
     size: [42, 40]
     background:
       type: rectangle
-      corner_radius: 8
+      corner_radius: 10
       normal: *color7
       highlight: *color3
     foreground:
@@ -256,29 +256,29 @@ tool_bar:
     action: Keyboard_ascii
 #恢复
   redo: &redo
-    size: [42, 40]
+    size: [43, 40]
     background:
       type: rectangle
-      corner_radius: 8
+      corner_radius: 10
       normal: *color7
       highlight: *color3
     foreground:
       style: ""
-      padding: 8
-      font_size: 22
+      padding: 11
+      font_size: 18
     action: redo
 #撤消
   undo: &undo
-    size: [42, 40]
+    size: [43, 40]
     background:
       type: rectangle
-      corner_radius: 8
+      corner_radius: 10
       normal: *color7
       highlight: *color3
     foreground:
       style: ""
-      padding: 8
-      font_size: 22
+      padding: 11
+      font_size: 18
     action: undo
 #右侧按钮列表（从右向左排列）
   buttons: [*hide, *layout, *yingfu, *clip, *toggle, *redo, *undo]
@@ -769,8 +769,8 @@ preset_keys:
   cut: {label: "✁", functional: false, send: Control+x}
   copy: {label: "❐", functional: false, send: Control+c}
   paste: {label: "⎗", functional: false, send: Control+v}
-  redo: {label: "\uE18D", functional: false, send: Control+Shift+z} #>=Android 6.0
-  undo: {label: "\uE18E", functional: false, send: Control+z} #>=Android 6.0
+  redo: {label: "\uE02F", functional: false, send: Control+Shift+z} #>=Android 6.0
+  undo: {label: "\uE02E", functional: false, send: Control+z} #>=Android 6.0
   Tab: {label: Tab, repeatable: false, text: '	'}
   Insert: {label: ⌤, send: Insert}
   Delete: {label: ⌦, send: Delete, functional: false}
@@ -795,15 +795,14 @@ preset_keys:
 #切换键盘
   Keyboard_layout: {label: "\uE101", functional: false, send: Eisu_toggle, select: layout}
   Keyboard_pinyin_jiugong: {label: "\uE10E", functional: false, send: Eisu_toggle, select: pinyin_jiugong}
-  Keyboard_wubi86_double_key: {label: "\uE066", functional: false, send: Eisu_toggle, select: wubi86_double_key}
+  Keyboard_wubi86_double_key: {label: "\uE10D", functional: false, send: Eisu_toggle, select: wubi86_double_key}
   Keyboard_ascii: {label: abc, functional: true, send: Eisu_toggle, select: .ascii}
-  Keyboard_default: {label: "ic@close", functional: false, send: Eisu_toggle, select: .default}
+  Keyboard_default: {label: "\uE030", functional: false, send: Eisu_toggle, select: .default}
   Keyboard_switch: {label: 键盘, functional: true, send: Eisu_toggle, select: .next}
   Keyboard_number: {label: 123, preview: "\uE012", functional: true, send: Eisu_toggle, select: number}
-  Keyboard_numberb: {label: "\uE1C1", functional: false, send: Eisu_toggle, select: numberb}
   Keyboard_symbols: {label: "\uE01C", functional: true, send: Eisu_toggle, select: symbols}
   Keyboard_next: {label: 后退, functional: false, send: Eisu_toggle, select: .next}
-  Keyboard_last: {label: "\uE031", functional: false, send: Eisu_toggle, select: .last}
+  Keyboard_last: {label: 返回, functional: false, send: Eisu_toggle, select: .last}
   Keyboard_last_lock: {label: "\uE073", send: Eisu_toggle, select: .last_lock}
   menu_keyboard: {label: "\uE03E", send: function, command: menu_keyboard}
   clipboard_window: {label: "\uE099", send: function, command: "clipboard_window"}
@@ -838,7 +837,7 @@ preset_keys:
   set_theme: {label: "\uE189", send: function, command: set_theme, option: ""} #空参数刷新主题
   pinyin_scheme: {label: "\uE107", send: Shift+Control+6}  #一键切拼音方案
   wubi86_scheme: {label: "\uE109", send: Shift+Control+7}  #一键切五笔方案
-  wubi86_double_key_scheme: {label: "\uE109", send: Shift+Control+8}  #一键切双键五笔方案
+  wubi86_double_key_scheme: {label: "\uE10D", send: Shift+Control+8}  #一键切双键五笔方案
   pinyin_jiugong_scheme: {label: "\uE10E", send: Shift+Control+9}  #一键切九宫拼音方案
 
 #trime命令
@@ -858,7 +857,7 @@ preset_keys:
   WebSearch: {label: 搜索網頁, send: function, command: web_search, option: "%4$s"} #搜索，其他view、dial、edit、search等intent，參考安卓的intent文檔：https://developer.android.com/reference/android/content/Intent.html
   Nightly: {label: "\uE5F3", send: function, command: run, option: "https://github.com/osfans/trime/releases/tag/nightly"} #夜版
   Netdisk: {label: "\uE05f", send: function, command: run, option: "http://trime365.ysepan.com"} #网盘
-  Bing: {label: "\uE1A0", send: function, command: run, option: "http://cn.bing.com/search?q=%s"} 
+  Bing: {label: "\uE1A2", send: function, command: run, option: "http://cn.bing.com/search?q=%s"} 
   Hand_writing: {label: "\uE06A", send: function, command: run, option: "https://chinesehandwritinggpt.com/zhs"} 
   MT: {label: "\uE67B", send: function, command: run, option: "bin.mt.plus.canary"}
   File_explorer: {label: "\uE67C", send: function, command: run, option: "com.android.fileexplorer"}

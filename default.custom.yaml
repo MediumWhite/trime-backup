@@ -6,22 +6,20 @@ customization:
   rime_version: 1.16.1
 patch:
   menu/alternative_select_labels: ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"]
-  
+  menu/page_size: 4
   schema_list:
     - {schema: pinyin}
     - {schema: wubi86}
     - {schema: wubi86_double_key}
     - {schema: pinyin_jiugong}
-  
   key_binder/+:
-    sequence:
-      up: "Control+j"        # 上移
-      down: "Control+k"    # 下移
-      reset: "Control+l"      # 重置
-      pin: "Control+p"      # 置顶
     bindings:
       - {accept: "Shift+Control+6", select: pinyin, when: always}
       - {accept: "Shift+Control+7", select: wubi86, when: always}
       - {accept: "Shift+Control+8", select: wubi86_double_key, when: always}
       - {accept: "Shift+Control+9", select: pinyin_jiugong, when: always}
-  
+    sequence:
+      up: "Control+j"
+      down: "Control+k"
+      reset: "Control+l"
+      pin: "Control+p"
