@@ -433,19 +433,13 @@ preset_keyboards:
       "keys/@15":
         click: Keyboard_default
         width: 17
-        # key_back_color: rbc
-        # hilited_key_back_color: rhbc
-        # key_text_color: rtc
-        # hilited_key_text_color: rhtc
-      "keys/@16":
-        click: ','
+      "keys/@16/click": ','
       "keys/@17":
         click: '0'
         popup: ["{}{Left}", "(){Left}", "[]{Left}"]
         key_text_size": ～
         swipe_down: space
-      "keys/@18":
-        click: '.'
+      "keys/@18/click": '.'
     name: "数字"
 
   layout:
@@ -476,9 +470,9 @@ preset_keyboards:
       - {width: 10}
       - {click: 无能键, label: 拼音, key_text_size: 12, height: 8, key_text_offset_y: -3, key_back_color: *color7, hilited_key_back_color: *color7}
       - {width: 100, height: 25}
-      - {width: 33}
-      - {click: Keyboard_default, width: 34, height: 15}
-      - {width: 100, height: 4}
+      - {width: 34}
+      - {click: Keyboard_default, label: "ic@close" , width: 30, height: 17}
+      - {width: 100, height: 2}
     name: "键盘布局"
 
   symbols:
